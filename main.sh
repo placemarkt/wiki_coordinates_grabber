@@ -22,21 +22,26 @@ while IFS=: read -r si ei
   do
   rm -f temp.bz2
   rm -f temp.xml
-  ccount=`expr si - ei`
+  ccount=`expr $ei - $si`
+
   dd if=enwiki-20200220-pages-articles-multistream.xml.bz2 iflag=skip_bytes,count_bytes skip=$si count=$ccount of=temp.bz2
   ( echo "<content>" ; bunzip2 -c temp.bz2 ; echo "</content>" ) >> temp.xml
 
-  while IFS=: read -r col1 col2 col3
-  do
-    if [ "$si" == "$col1" ]; then
-      coordinates=$(xmlstarlet sel -t -m "//page[id=$col2]" -v "*" -n temp.xml | grep "{{Coord")
-      if [ -z "$coordinates" ]; then
-        continue
-      else
-        echo "$col2:$col3:$coordinates"
-      fi
+  readarray -t ids < <(xmlstarlet sel -t -m "//page" -v "id" -n temp.xml)
+
+  for idx in "${!ids[@]}"; do
+    id="${ids[$idx]}"
+    title=$(xmlstarlet sel -t -m "//page[id=$id]" -v "title" -n temp.xml)
+    coordinates=$(xmlstarlet sel -t -m "//page[id=$id]" -v "*" -n temp.xml | ack -i "\{\{coord.*display=(?!.*inline)")
+    if [ -z "$coordinates" ]; then
+      continue
     else
-      break 
+      echo "$id:$title:$coordinates" >> coords.csv
     fi
-  done < enwiki-20200220-pages-articles-multistream-index.txt
+  done
+  
 done < index-formatted.txt
+
+
+# "{{Coord.*display=title"
+#  ack "\{\{coord.*display=(?!.*inline)")
