@@ -11,8 +11,17 @@ bool isCardinalDirection(char* p) {
   }
 }
 
+void remove_spaces(char* s) {
+    const char* d = s;
+    do {
+        while (*d == ' ') {
+            ++d;
+        }
+    } while ((*(s++) = *(d++)));
+}
+
 int main(int argc, char *argv[]) {
-  
+  remove_spaces(argv[1]);
   char *p = (strstr(argv[1], "oord") + 5);
   char coords[256];
   unsigned coordsCounter = 0;
