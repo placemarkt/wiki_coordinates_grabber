@@ -10,6 +10,16 @@ declare j
 declare idarr
 declare titlearr
 
+function write_coords() {
+  coordinates=$(xmlstarlet sel -t -m "//page[id=$1]" -v "*" -n temp.xml | ack -i "\{\{coord.*display=(?!.*inline)" | xargs -I{} ./compiled {})
+  if [ -z "$coordinates" ]; then
+    return;
+  else
+    formatted_coordinates=$(echo $coordinates | GeoConvert)
+    echo "$1|$2|$formatted_coordinates" >> coords.csv
+  fi
+}
+
 while IFS=: read -r col1 col2 col3
   do
   if [ -z "$i" ]; then
@@ -34,16 +44,12 @@ while IFS=: read -r col1 col2 col3
       dd if=enwiki-20200220-pages-articles-multistream.xml.bz2 iflag=skip_bytes,count_bytes skip=$i count=$ccount of=temp.bz2
       ( echo "<content>" ; bunzip2 -c temp.bz2 ; echo "</content>" ) >> temp.xml
 
+      N=1024
       for idx in "${!idarr[@]}"; do
+        ((i=i%N)); ((i++==0)) && wait
         id="${idarr[$idx]}"
         title="${titlearr[$idx]}"
-        coordinates=$(xmlstarlet sel -t -m "//page[id=$id]" -v "*" -n temp.xml | ack -i "\{\{coord.*display=(?!.*inline)" | xargs -I{} ./compiled {})
-        if [ -z "$coordinates" ]; then
-          continue
-        else
-          formatted_coordinates=$(echo $coordinates | GeoConvert)
-          echo "$id|$title|$formatted_coordinates" >> coords.csv
-        fi
+        write_coords $id $title &
       done
 
       i=""
