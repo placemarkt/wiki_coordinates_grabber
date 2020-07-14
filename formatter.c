@@ -22,7 +22,7 @@ void remove_spaces(char* s) {
 
 int main(int argc, char *argv[]) {
   remove_spaces(argv[1]);
-  char *p = (strstr(argv[1], "oord") + 5);
+  char *p = (strstr(argv[1], "oord|") + 5);
   char coords[256];
   unsigned coordsCounter = 0;
   unsigned delimiterCounter = 0;
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
     p++;
   }
 
-  p = (strstr(argv[1], "oord") + 5);
+  p = (strstr(argv[1], "oord|") + 5);
 
   if (delimiterCounter > 2) {
     // loop for cardinal direction formatted coordinates

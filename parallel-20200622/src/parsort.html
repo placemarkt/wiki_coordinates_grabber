@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>GNU parsort</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body>
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#SYNOPSIS">SYNOPSIS</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a></li>
+  <li><a href="#EXAMPLE">EXAMPLE</a></li>
+  <li><a href="#PERFORMANCE">PERFORMANCE</a></li>
+  <li><a href="#AUTHOR">AUTHOR</a></li>
+  <li><a href="#LICENSE">LICENSE</a></li>
+  <li><a href="#DEPENDENCIES">DEPENDENCIES</a></li>
+  <li><a href="#SEE-ALSO">SEE ALSO</a></li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>parsort - Sort (big files) in parallel</p>
+
+<h1 id="SYNOPSIS">SYNOPSIS</h1>
+
+<p><b>parsort</b> <i>options for sort</i></p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p><b>parsort</b> uses GNU <b>sort</b> to sort in parallel. It works just like <b>sort</b> but faster on inputs with more than 1 M lines, if you have a multicore machine.</p>
+
+<p>Hopefully these ideas will make it into GNU Sort in the future.</p>
+
+<h1 id="EXAMPLE">EXAMPLE</h1>
+
+<p>Sort files:</p>
+
+<pre><code>  parsort *.txt &gt; sorted.txt</code></pre>
+
+<p>Sort stdin (standard input) numerically:</p>
+
+<pre><code>  cat numbers | parsort -n &gt; sorted.txt</code></pre>
+
+<h1 id="PERFORMANCE">PERFORMANCE</h1>
+
+<p><b>parsort</b> is faster on files, because these can be read in parallel.</p>
+
+<p>On a 48 core machine you should see a speedup of 3x over <b>sort</b>.</p>
+
+<h1 id="AUTHOR">AUTHOR</h1>
+
+<p>Copyright (C) 2020 Ole Tange, http://ole.tange.dk and Free Software Foundation, Inc.</p>
+
+<h1 id="LICENSE">LICENSE</h1>
+
+<p>Copyright (C) 2012 Free Software Foundation, Inc.</p>
+
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or at your option any later version.</p>
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</p>
+
+<h1 id="DEPENDENCIES">DEPENDENCIES</h1>
+
+<p><b>parsort</b> uses <b>sort</b>, <b>bash</b>, <b>parallel</b>, and <b>mbuffer</b>.</p>
+
+<h1 id="SEE-ALSO">SEE ALSO</h1>
+
+<p><b>sort</b></p>
+
+
+</body>
+
+</html>
+
+

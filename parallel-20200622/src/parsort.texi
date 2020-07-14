@@ -1,0 +1,98 @@
+\input texinfo
+@setfilename parsort.info
+
+@documentencoding utf-8
+
+@settitle parsort - Sort (big files) in parallel
+
+@node Top
+@top parsort
+
+@menu
+* NAME::
+* SYNOPSIS::
+* DESCRIPTION::
+* EXAMPLE::
+* PERFORMANCE::
+* AUTHOR::
+* LICENSE::
+* DEPENDENCIES::
+* SEE ALSO::
+@end menu
+
+@node NAME
+@chapter NAME
+
+parsort - Sort (big files) in parallel
+
+@node SYNOPSIS
+@chapter SYNOPSIS
+
+@strong{parsort} @emph{options for sort}
+
+@node DESCRIPTION
+@chapter DESCRIPTION
+
+@strong{parsort} uses GNU @strong{sort} to sort in parallel. It works just like
+@strong{sort} but faster on inputs with more than 1 M lines, if you have a
+multicore machine.
+
+Hopefully these ideas will make it into GNU Sort in the future.
+
+@node EXAMPLE
+@chapter EXAMPLE
+
+Sort files:
+
+@verbatim
+  parsort *.txt > sorted.txt
+@end verbatim
+
+Sort stdin (standard input) numerically:
+
+@verbatim
+  cat numbers | parsort -n > sorted.txt
+@end verbatim
+
+@node PERFORMANCE
+@chapter PERFORMANCE
+
+@strong{parsort} is faster on files, because these can be read in parallel.
+
+On a 48 core machine you should see a speedup of 3x over @strong{sort}.
+
+@node AUTHOR
+@chapter AUTHOR
+
+Copyright (C) 2020 Ole Tange,
+http://ole.tange.dk and Free Software Foundation, Inc.
+
+@node LICENSE
+@chapter LICENSE
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+at your option any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+@node DEPENDENCIES
+@chapter DEPENDENCIES
+
+@strong{parsort} uses @strong{sort}, @strong{bash}, @strong{parallel}, and @strong{mbuffer}.
+
+@node SEE ALSO
+@chapter SEE ALSO
+
+@strong{sort}
+
+@bye
