@@ -16,7 +16,7 @@
 #      j=""
 #    fi
 #  fi
-#done < enwiki-20200220-pages-articles-multistream-index.txt
+#done < enwiki-20200701-pages-articles-multistream-index.txt
 
 while IFS=: read -r si ei
   do
@@ -24,7 +24,7 @@ while IFS=: read -r si ei
   rm -f temp.xml
   ccount=`expr $ei - $si`
 
-  dd if=enwiki-20200220-pages-articles-multistream.xml.bz2 iflag=skip_bytes,count_bytes skip=$si count=$ccount of=temp.bz2
+  dd if=enwiki-20200701-pages-articles-multistream.xml.bz2 iflag=skip_bytes,count_bytes skip=$si count=$ccount of=temp.bz2
   ( echo "<content>" ; bunzip2 -c temp.bz2 ; echo "</content>" ) >> temp.xml
 
   readarray -t ids < <(xmlstarlet sel -t -m "//page" -v "id" -n temp.xml)
@@ -37,7 +37,7 @@ while IFS=: read -r si ei
       continue
     else
       formatted_coordinates=$(echo $coordinates | GeoConvert)
-      echo "$id:$title:$formatted_coordinates" >> coords.csv
+      echo "$id|$title|$formatted_coordinates" >> coords.csv
     fi
   done
   
