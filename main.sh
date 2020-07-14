@@ -1,22 +1,22 @@
 #!/usr/bin/bash
 
-#declare i
-#declare j
-#while IFS=: read -r col1 col2 col3
-#  do
-#  if [ -z "$i" ]; then
-#    i=$col1
-#  else
-#    if [ "$i" == "$col1" ]; then
-#      continue
-#    else
-#      j=$col1
-#      echo "$i:$j" >> index-formatted.txt
-#      i=""
-#      j=""
-#    fi
-#  fi
-#done < enwiki-20200701-pages-articles-multistream-index.txt
+declare i
+declare j
+while IFS=: read -r col1 col2 col3
+  do
+  if [ -z "$i" ]; then
+    i=$col1
+  else
+    if [ "$i" == "$col1" ]; then
+      continue
+    else
+      j=$col1
+      echo "$i:$j" >> index-formatted.txt
+      i=""
+      j=""
+    fi
+  fi
+done < enwiki-20200701-pages-articles-multistream-index.txt
 
 while IFS=: read -r si ei
   do
