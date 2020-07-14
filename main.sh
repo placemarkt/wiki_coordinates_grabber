@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+# Todos
+#   - Currently doesn't work for coord templaters where coordinates do not come directly after "coord" string. e.g. {{Coord|display=title|45|N|114|W|region:US-ID_type:adm1st_scale:3000000}}
+
 function write_coords() {
   coordinates=$(xmlstarlet sel -t -m "//page[id=$1]" -v "*" -n temp.xml | ack -i "\{\{coord.*display=(?!.*inline)")
   if [ -z "$coordinates" ]; then
@@ -38,7 +41,7 @@ function get_location_articles() {
         rm -f temp.xml       
         ccount=`expr $j - $i`
 
-        dd if=enwiki-20200701-pages-articles-multistream.xml.bz2 iflag=skip_bytes,count_bytes skip=$i count=$ccount of=temp.bz2
+        dd if=enwiki-20200220-pages-articles-multistream.xml.bz2 iflag=skip_bytes,count_bytes skip=$i count=$ccount of=temp.bz2
         ( echo "<content>" ; bunzip2 -c temp.bz2 ; echo "</content>" ) >> temp.xml
 
         parallel --will-cite --link --jobs 0 write_coords ::: "${idarr[@]}" ::: "${titlearr[@]}"
@@ -49,7 +52,7 @@ function get_location_articles() {
         titlearr=("")
       fi
     fi
-  done < enwiki-20200701-pages-articles-multistream-index.txt
+  done < enwiki-20200220-pages-articles-multistream-index.txt
 }
 
 get_location_articles
