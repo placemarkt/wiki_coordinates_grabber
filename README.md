@@ -24,3 +24,7 @@ You'll also need to download `enwiki-latest-pages-articles-multistream-index.txt
 ## Contributing
 
 Contributions welcome. Be nice.
+
+## About Placemarkt
+
+Placemarkt is a location bookmarking service for your favorite places. Check us out [here](https://placemarkt.net).
