@@ -1,6 +1,6 @@
 # Wiki Coordinates Grabber
 
-A script to grab coordinates listed on wikipedia pages, returning a csv formatted file containing article id, title, and GSP coordinate.
+A script to grab coordinates listed on Wikipedia pages, returning a csv formatted file containing article id, title, and lat/lng coordinate.
 
 ## Installation
 
