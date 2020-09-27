@@ -18,8 +18,7 @@ You'll also need to download `enwiki-latest-pages-articles-multistream-index.txt
 ## Use
 
 1. Unzip the multistream index.
-2. Update the multistream index and xml file names in the bash script. Depending on what file version you use these file names might be different.
-3. Run the `get_location_articles` command from the command line.
+2. Run the `get_location_articles` command from the command line.
 
 ## Contributing
 

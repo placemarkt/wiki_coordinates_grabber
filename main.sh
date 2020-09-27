@@ -14,6 +14,7 @@ function write_coords() {
 }
 
 export -f write_coords
+
 function get_location_articles() {
   declare i
   declare j
@@ -41,7 +42,7 @@ function get_location_articles() {
         rm -f temp.xml       
         ccount=`expr $j - $i`
 
-        dd if=enwiki-20200220-pages-articles-multistream.xml.bz2 iflag=skip_bytes,count_bytes skip=$i count=$ccount of=temp.bz2
+        dd if=enwiki-latest-pages-articles-multistream.xml.bz2 iflag=skip_bytes,count_bytes skip=$i count=$ccount of=temp.bz2
         ( echo "<content>" ; bunzip2 -c temp.bz2 ; echo "</content>" ) >> temp.xml
 
         parallel --will-cite --link --jobs 0 write_coords ::: "${idarr[@]}" ::: "${titlearr[@]}"
@@ -52,7 +53,7 @@ function get_location_articles() {
         titlearr=("")
       fi
     fi
-  done < enwiki-20200220-pages-articles-multistream-index.txt
+  done < enwiki-latest-pages-articles-multistream-index.txt
 }
 
 get_location_articles
